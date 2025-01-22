@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "cryptoinshort"
+version = "0.1.0"
+description = ""
+authors = ["Aadarsha <aadarshakarki000@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "^5.1.5"
+djangorestframework = "^3.15.2"
+django-filter = "^24.3"
+pillow = "^11.1.0"
+python-dotenv = "^1.0.1"
+psycopg = {extras = ["binary"], version = "^3.2.4"}
+requests = "^2.32.3"
+pyotp = "^2.9.0"
+qrcode = "^8.0"
+boto3 = "^1.36.3"
+gunicorn = "^23.0.0"
+django-storages = "^1.14.4"
+django-cors-headers = "^4.6.0"
+drf-spectacular = "^0.28.0"
+django-crontab = "^0.7.1"
+django-redis = "^5.4.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
