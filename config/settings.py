@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     "django_filters",
     "django_crontab",
     "apps.account",
+    "apps.news",
 ]
 
 MIDDLEWARE = [
@@ -212,4 +213,18 @@ CACHES = {
 }
 
 # Cronjobs
-CRONJOBS = []
+CRONJOBS = [
+    (
+        "*/2 * * * *",
+        "apps.news.crons.fetch_crypto_news",
+        ">> /tmp/fetch_crypto_news.log",
+    )
+]
+
+
+# CRYPTO NEWS CREDENTIALS
+CRYPTO_NEWS_API_URL = os.environ["CRYPTO_NEWS_API_URL"]
+CRYPTO_NEWS_API_KEY = os.environ["CRYPTO_NEWS_API_KEY"]
+
+# OPENAI CREDENTIALS
+OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
