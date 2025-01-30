@@ -1,16 +1,8 @@
 # Build stage
-FROM python:3.11-alpine as builder
+FROM python:3.11 as builder
 
 # Set Python to run in unbuffered mode
 ENV PYTHONUNBUFFERED=1
-
-# Install system dependencies needed for building
-RUN apk add --no-cache \
-  build-base \
-  gcc \
-  musl-dev \
-  jpeg-dev \
-  zlib-dev
 
 # Install and configure Poetry
 ENV POETRY_HOME=/opt/poetry
@@ -29,13 +21,18 @@ COPY pyproject.toml poetry.lock ./
 RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
 
 # Final stage
-FROM python:3.11-alpine as final
+FROM python:3.11 as final
 
-# Set Python to run in unbuffered mode
+# Set environment variables
 ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PLAYWRIGHT_BROWSERS_PATH=/app/ms-playwright
 
-# Install cron and other dependencies
-RUN apk add --no-cache dcron libc6-compat poppler-utils
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    cron \
+    poppler-utils \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
@@ -43,9 +40,12 @@ WORKDIR /app
 COPY --from=builder /app/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Install Playwright browsers and dependencies
+RUN playwright install --with-deps chromium
+
 # Copy application code
 COPY . .
 
 RUN chmod +x ./initial_script.sh
 
-CMD ["sh", "-c", "crond -b && ./initial_script.sh"]
+CMD ["sh", "-c", "cron && ./initial_script.sh"]
