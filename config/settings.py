@@ -43,6 +43,8 @@ CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1:3001",
     "http://localhost:3002",
     "http://127.0.0.1:300",
+    "https://api.cryptoinshort.com",
+    "http://b4wokkk804s044s8ock88oc8.13.233.162.4.sslip.io",
 ]
 
 CORS_ALLOWED_ORIGINS = CSRF_TRUSTED_ORIGINS
