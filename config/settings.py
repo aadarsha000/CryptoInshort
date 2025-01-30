@@ -216,7 +216,7 @@ CACHES = {
 CRONJOBS = [
     (
         "*/2 * * * *",
-        "apps.news.crons.fetch_crypto_news",
+        "apps.news.crons.fetch_new_news.fetch_crypto_news",
         ">> /tmp/fetch_crypto_news.log",
     )
 ]

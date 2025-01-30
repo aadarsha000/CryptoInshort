@@ -25,6 +25,8 @@ django-crontab = "^0.7.1"
 django-redis = "^5.4.0"
 djangorestframework-simplejwt = "^5.4.0"
 openai = "^1.60.1"
+playwright = "^1.49.1"
+newspaper3k = "^0.2.8"
 
 
 [build-system]

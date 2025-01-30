@@ -97,14 +97,14 @@ def fetch_crypto_news():
         "section": "general",
         "items": 3,
         "page": 1,
-        "date": "last5min",
+        # "date": "last5min",
         "token": api_key,
     }
     ticker_params = {
         "section": "alltickers",
         "items": 3,
         "page": 1,
-        "date": "last5min",
+        # "date": "last5min",
         "token": api_key,
     }
 

@@ -5,8 +5,19 @@ from apps.news.serializers.crypto_ticker import CryptoTickerSerializer
 
 
 class CryptoNewsSerializer(serializers.ModelSerializer):
-    trickers = CryptoTickerSerializer(many=True, read_only=True)
+    tickers = CryptoTickerSerializer(many=True, read_only=True)
 
     class Meta:
         model = CryptoNews
-        fields = "__all__"
+        fields = [
+            "id",
+            "title",
+            "content",
+            "summary",
+            "source_url",
+            "source_name",
+            "image_url",
+            "published_at",
+            "sentiment",
+            "tickers",
+        ]
